@@ -1,0 +1,22 @@
+** Error: input sources too deeply nested
+   Processing macro abc
+   Processing macro pqr
+   Processing macro abc
+   Processing macro pqr
+   Processing macro abc
+   Processing macro pqr
+   Processing macro abc
+   Processing macro pqr
+   Processing macro abc
+   Processing macro pqr
+   Processing macro abc
+   Processing macro pqr
+   Processing macro abc
+   Processing macro pqr
+   Processing macro abc
+   Processing macro pqr
+   Processing macro abc
+   Processing macro pqr
+   Processing macro abc
+   Detected near line 11 of infiles/05
+** xfpt abandoned

@@ -1,0 +1,36 @@
+<para>
+This input file is another error tester.
+</para>
+<para>
+The quick brown .
+</para>
+<para>
+The quick brown .
+</para>
+<para>
+The quick brown &unknown() animal.
+</para>
+<para>
+The quick brown &zzz( is wrong.
+</para>
+<para>
+ABC $+2 XYZ
+PQR $= LMN
+PQR $=
+ABC $X YZ  test
+</para>
+<para>
+The <literal>italic <emphasis role="bold">bold</literal> missing.
+</para>
+<para>
+The <literal>italic without end.
+</para>
+<para>
+Pack my box 
+</para>
+<para>
+The start of the paragraph.
+</para>
+<para>
+The end of the paragraph.
+</para>

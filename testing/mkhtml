@@ -1,0 +1,4 @@
+#! /bin/sh
+
+cp outfiles/$1 test.xml
+xmlto -x MyStyle-nochunk-html.xsl html-nochunks test.xml

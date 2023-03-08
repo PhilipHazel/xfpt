@@ -1,0 +1,21 @@
+xfpt: unknown option "-unknown"
+Usage: xfpt [[-]-help]
+            [-o <output-file>]
+            [-S <share-directory>]
+            [-v or --version]
+            [input-file]
+Usage: xfpt [[-]-help]
+            [-o <output-file>]
+            [-S <share-directory>]
+            [-v or --version]
+            [input-file]
+xpft version 1.00 01-March-2023
+Usage: xfpt [[-]-help]
+            [-o <output-file>]
+            [-S <share-directory>]
+            [-v or --version]
+            [input-file]
+** Error: failed to open /non/exist: No such file or directory
+** xfpt abandoned
+** Error: failed to open /non/exist: No such file or directory
+** xfpt abandoned

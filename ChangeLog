@@ -1,0 +1,132 @@
+ChangeLog file for xfpt
+-----------------------
+
+Release 1.00 08-March-2023
+--------------------------
+
+1. Fix crash when --version used (double file close, a consequence of 4 below).
+
+2. Some general code tidies have been done and the tests have been extended in
+   the light of coverage checking and to test various command line options. The
+   documentation has also been given an overhaul. It seems like time to move to
+   a 1.00 release.
+
+
+Release 0.11 04-September-2020
+------------------------------
+
+1. Fix a buffer overrun (read) for a missing delimiter after $=2 (for example).
+
+2. Give an error if a binary zero is encountered in the input, and ignore it.
+
+3. Give an error if input source nesting is too deep (e.g. a runaway recursive
+macro).
+
+4. Yet more tidying to ensure all memory gets freed (2 below was very
+incomplete).
+
+
+Release 0.10 28-August-2018
+---------------------------
+
+1. A few minor code re-writings to avoid compiler warnings when compiled with
+   lots of warnings turned on.
+
+2. Slightly more involved re-writings to ensure that all memory gets freed.
+
+3. Fixed typos in the documentation.
+
+4. Recognize --version as well as -v.
+
+
+Release 0.09 18-May-2012
+------------------------
+
+1. Add the "check" feature to .push to give a warning for certain items on the
+   stack that are automatically popped at the end of processing.
+
+2. Update the standard macros so that "check" warnings are given for unclosed
+   lists, displays, footnotes, etc.
+
+
+Release 0.08 22-July-2009
+-------------------------
+
+1. The macro ".image" was generating </imagedata> on a new line, thus causing
+   some XML processors to think there was content (the newline) when there is
+   not supposed to be.
+
+2. A "read random memory" bug that was probably introduced with change 0.06/1
+   caused a crash on 64-bit Mac OS X, though not in other environments. The
+   random memory was allocated, so never showed with valgrind. The crash
+   happened right at the end of the input.
+
+
+Release 0.07
+------------
+
+Added macros .endpreface, etc, and .pi. There is no change of code, except to
+bump the version number.
+
+
+Release 0.06
+------------
+
+1. The .include directive was not working correctly when it appeared inside
+   a macro. The contents of the file were not read until after the macro's
+   lines had been processed. Mixing of .include and macro calls, in any
+   combination, should now work correctly. A full traceback of the position of
+   any errors is now given (formerly it stopped when a position in a file was
+   given).
+
+
+Release 0.05
+------------
+
+1. The .nonl directive was not being handled correctly when it appeared at the
+   start of a paragraph and in some other cases. Its argument is now handled as
+   the next input line, but without a newline on the end.
+
+
+Release 0.04
+------------
+
+1. Single quotes were being turned into typographic quotes inside <literal>
+   phrases, when they should not be. Normal cases (where <literal> is generated
+   by an xfpt macro) are now handled correctly.
+
+2. The .vlist macro didn't set .literal off at the end, causing a following
+   .new macro not to work properly; it generated bad XML.
+
+
+Release 0.03
+------------
+
+1. Added .nest built-in directive in order to support .footnote and .endnote
+   macros (also added).
+
+2. Other new macros: .figure, .image, .preface, .appendix, .colophon, .table.
+
+
+Release 0.02
+------------
+
+1. Added the .inliteral directive.
+
+2. Added the .nonl directive.
+
+3. Updated the .new and .wen directives to work properly in literal sections.
+
+
+Release 0.01
+------------
+
+Added new macros .index-from, .index-to, .index-see, and .index-seealso.
+
+
+Release 0.00
+------------
+
+This is the first release. There are no changes yet!
+
+****

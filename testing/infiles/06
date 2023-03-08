@@ -1,0 +1,72 @@
+.include stdflags
+.include "stdmacs"
+
+This input file is another error tester.
+
+.inliteral layout
+.endinliteral
+
+.macro xxx
+.inliteral junk
+.endinliteral
+.endmacro
+
+.xxx
+
+.literal junk
+
+. Macro with no name
+.macro
+
+.nest junk
+
+. Macro with directive not allowed in inline call
+.macro ttt
+.echo "Echo message"
+.endmacro
+
+.ttt
+
+The quick brown &ttt().
+
+. Macro nesting not allowed in inline call
+.macro zzz
+.ttt
+.endmacro
+
+.zzz
+
+The quick brown &zzz().
+
+. Unknown macro in inline call
+The quick brown &unknown() animal.
+
+. Missing ) in inline call
+The quick brown &zzz( is wrong.
+
+. Misuse of $+ and $=
+.macro plusbad
+ABC $+2 XYZ
+PQR $= LMN
+PQR $=
+ABC $X YZ $0 test
+.endmacro
+
+.plusbad
+
+. Flag nesting error
+The &`italic &*bold`& missing.
+
+. Missing end flag
+The &`italic without end.
+
+. Bad ampersand
+Pack my box &
+
+. Bad .nest in a paragraph
+The start of the paragraph.
+.nest unknown
+The end of the paragraph.
+
+. Missing endmacro at eof - must be last
+.macro endless

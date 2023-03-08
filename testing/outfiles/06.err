@@ -1,0 +1,70 @@
+** Error: .inliteral is permitted only inside a macro
+   Detected near line 6 of infiles/06
+
+** Error: .endinliteral is permitted only inside a macro
+   Detected near line 7 of infiles/06
+
+** Error: "layout", "text", "xml", or "off" expected, but "junk" found
+   Processing macro xxx
+   Detected near line 14 of infiles/06
+
+** Error: "layout", "text", "xml", or "off" expected, but "junk" found
+   Detected near line 16 of infiles/06
+
+** Error: a macro must be given a name
+   Detected near line 19 of infiles/06
+
+** Error: "begin" or "end" expected, but "junk" found
+   Detected near line 21 of infiles/06
+
+Echo message
+** Error: ".echo" is not permitted in an inline macro call
+   Processing macro ttt
+   Detected near line 31 of infiles/06
+
+Echo message
+** Error: ".ttt" is not permitted in an inline macro call
+   Processing macro zzz
+   Detected near line 40 of infiles/06
+
+** Error: unknown macro "unknown" in inline macro call
+   Detected near line 43 of infiles/06
+
+** Error: missing closing parenthesis in inline macro call:
+   zzz( is wrong.
+
+   Processing macro zzz
+   Detected near line 46 of infiles/06
+
+Echo message
+** Error: relative macro argument not in "eacharg" section
+   Processing macro plusbad
+   Detected near line 55 of infiles/06
+
+** Error: bad macro argument substitution: " " follows "$="
+   Processing macro plusbad
+   Detected near line 55 of infiles/06
+
+** Error: bad macro argument substitution: end of line follows "$="
+   Processing macro plusbad
+   Detected near line 55 of infiles/06
+
+** Error: bad macro argument substitution: "X" follows "$"
+   Processing macro plusbad
+   Detected near line 55 of infiles/06
+
+** Error: flag nesting error: "*&" expected before "`&"
+   Detected near line 59 of infiles/06
+
+** Error: missing closing flag `&
+   Detected near line 62 of infiles/06
+
+** Error: ampersand found at end of line or string - ignored
+   Detected near line 65 of infiles/06
+
+** Error: "begin" or "end" expected, but "unknown" found
+   Detected near line 68 of infiles/06
+
+** Error: missing .endmacro
+   Detected near end of file
+

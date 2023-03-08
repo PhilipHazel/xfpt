@@ -1,0 +1,55 @@
+#/bin/sh
+
+# Script to make an xfpt release 
+
+if [ ! "$1" ]; then
+  echo "*** Version number missing ***"
+  exit 1
+fi
+
+# The name of the release directory
+
+dir=xfpt-$1
+
+# Check for pre-existing
+
+if [ -e Releases/$dir ] ; then
+  echo -n "** Releases/$dir exists: replace? [y/N] "
+  read reply
+  if [ "$reply" != "y" -a "$reply" != "yes" ] ; then
+    echo "** Abandoned"
+    exit 1
+  fi
+  /bin/rm -rf Releases/$dir Releases/$dir.*
+fi
+
+./Detrail
+
+echo Building release
+mkdir Releases/$dir
+mkdir Releases/$dir/src
+mkdir Releases/$dir/share
+mkdir Releases/$dir/doc
+mkdir Releases/$dir/testing
+
+cp Makefile.in INSTALL LICENCE NOTICE README configure configure.ac \
+   install-sh mkinstalldirs Releases/$dir
+cp src/{Makefile,*.h,*.c} Releases/$dir/src
+cp share/* Releases/$dir/share
+cp doc/xfpt.{1,html,pdf,xfpt} Releases/$dir/doc
+cp -r testing/{runtest,infiles,outfiles} Releases/$dir/testing
+
+find Releases/$dir -follow -name CVS -prune -exec /bin/rm -rf '{}' ';'
+
+echo Tarring and compressing
+cd Releases
+
+#tar cf $dir.tar $dir
+#gzip -v --best $dir.tar
+#gpg -sb $dir.tar.gz
+
+tar cf $dir.tar $dir
+bzip2 -9 $dir.tar
+#gpg -sb $dir.tar.bz2
+
+#End

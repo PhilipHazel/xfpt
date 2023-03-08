@@ -1,0 +1,11 @@
+.macro abc
+abc
+.pqr
+.endmacro
+
+.macro pqr
+abcd
+.abc
+.endmacro
+
+.abc

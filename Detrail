@@ -1,0 +1,48 @@
+#! /usr/bin/perl
+
+# This script scans the relevant parts of the xfpt tree and detrails
+# all the files. Adapted from my general "detrail" script.
+
+# This subroutine does the work for one file.
+
+sub detrail {
+my($file) = $_[0]; 
+my($changed) = 0; 
+open(FIN, "$file") || die "Can't open $file for input";
+@lines = <FIN>;
+close(FIN);
+foreach (@lines) 
+  { 
+  if (/[ \t]+\n$/) 
+    { 
+    s/[ \t]+\n$/\n/; 
+    $changed = 1;
+    }  
+  }
+if ($changed)
+  {    
+  print "  $file\n"; 
+  open(OUT, ">$file") || die "Can't open $file for output";
+  print OUT @lines;
+  close(OUT);
+  } 
+}  
+
+# This is the main program
+
+print "Detrailing ...\n";
+$, = "";   # Output field separator
+
+# Individual files
+
+for $file ("README", "Makefile.in", "ChangeLog", "src/Makefile")
+  { &detrail($file); } 
+  
+# Now run "find" to get source files.
+
+open (IN, "find -L src share \\( -name '*.h' -o -name '*.c' \\) -type f -print |") ||
+  die "Can't run the 'find' command";
+while (<IN>) { chomp; &detrail($_); }
+close(IN);
+          
+# End
