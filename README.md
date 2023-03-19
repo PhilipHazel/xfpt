@@ -8,5 +8,5 @@ makes it less ambiguous for large and/or complicated documents. xfpt is aimed
 at users who understand the XML that they are generating. It makes it easy to
 include literal XML, either in blocks, or within paragraphs. xfpt restricts
 itself to two special characters that trigger all its processing. You can read
-the [NE manual](https://github.com/PhilipHazel/xfpt/blob/main/doc/xfpt.pdf) on
+the [xfpt manual](https://github.com/PhilipHazel/xfpt/blob/main/doc/xfpt.pdf) on
 this GitHub site.
