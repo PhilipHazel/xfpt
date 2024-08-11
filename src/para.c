@@ -2,7 +2,7 @@
 *     xfpt - Simple ASCII->Docbook processor     *
 *************************************************/
 
-/* Copyright (c) University of Cambridge, 2023 */
+/* Copyright (c) University of Cambridge, 2024 */
 /* Written by Philip Hazel, started in 2006 */
 
 /* This module contains code for processing a paragraph by looking for flag
@@ -69,6 +69,7 @@ while (*q != 0 && *q != ')')
   *pp = as;
   pp = &(as->next);
   as->string = misc_readitem(q, US",)", &length, NULL, 0);
+  as->length = length; 
   q += length;
   if (*q == ',') while (isspace(*(++q)));
   }
@@ -91,7 +92,7 @@ for (;;)
   {
   uschar buffer[INBUFFSIZE];
 
-  read_process_macroline(macrocurrent->nextline->string, buffer);
+  read_process_macroline(macrocurrent->nextline->string, buffer, INBUFFSIZE);
 
   /* A directive such as .eacharg can skip to the end of the macro if there
   is no .endeach. Detect this by looking for a change of macrocurrent value,

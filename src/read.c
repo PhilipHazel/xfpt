@@ -2,7 +2,7 @@
 *     xfpt - Simple ASCII->Docbook processor     *
 *************************************************/
 
-/* Copyright (c) University of Cambridge, 2023 */
+/* Copyright (c) University of Cambridge, 2024 */
 /* Written by Philip Hazel, started in 2006 */
 
 /* This module contains code for reading the input. */
@@ -30,7 +30,7 @@ Returns:    nothing
 */
 
 void
-read_process_macroline(uschar *p, uschar *b)
+read_process_macroline(uschar *p, uschar *b, int blen)
 {
 int optend = 0;
 
@@ -49,9 +49,15 @@ while (*p != 0)
     continue;
     }
 
+  /* Ensure at least 3 bytes left in the buffer because all cases except an
+  argument substitution (which does its own test) add no more than two bytes,
+  and the third is for the terminating zero. */
+
+  if (blen < 3) error(33);   /* Hard error; does not return. */
+
   /* Until we hit a dollar, just copy verbatim */
 
-  if (*p != '$') { *b++ = *p++; continue; }
+  if (*p != '$') { *b++ = *p++; blen--; continue; }
 
   /* If dollar is at the end of the string, treat as literal. */
 
@@ -59,7 +65,7 @@ while (*p != 0)
 
   /* If the character after $ is another $, insert a literal $. */
 
-  if (p[1] == '$') { p++; *b++ = *p++; continue; }
+  if (p[1] == '$') { p++; *b++ = *p++; blen--; continue; }
 
   /* If the character after $ is +, we are dealing with arguments
   relative to macro_arg0 in a ".eacharg" section. Otherwise, we are dealing
@@ -73,6 +79,7 @@ while (*p != 0)
       error(18);
       *b++ = '$';
       *b++ = *p++;
+      blen -= 2;
       continue;
       }
     argbase = macro_argbase;
@@ -90,6 +97,7 @@ while (*p != 0)
         else error(17, p[1], "$=");
       *b++ = '$';
       *b++ = *p++;
+      blen -= 2;
       continue;
       }
     while (isdigit(*(++p))) argn = argn * 10 + *p - '0';
@@ -126,6 +134,7 @@ while (*p != 0)
     if (*p == 0 || *p == '\n') error(30, "end of line", "$");
       else error(17, p[1], "$");
     *b++ = *p++;
+    blen--;
     continue;
     }
   while (isdigit(*(++p))) argn = argn * 10 + *p - '0';
@@ -161,7 +170,12 @@ while (*p != 0)
 
   /* If we have found an argument, substitute it. */
 
-  if (arg != NULL) b += sprintf(CS b, "%s", arg->string);
+  if (arg != NULL)
+    {
+    blen -= arg->length;
+    if (blen < 1) error(33);  /* Hard; does not return */
+    b += sprintf(CS b, "%s", arg->string);
+    }
   }
 
 *b = 0;
@@ -294,7 +308,8 @@ for (;;)
       }
     else
       {
-      read_process_macroline(macrocurrent->nextline->string, inbuffer);
+      read_process_macroline(macrocurrent->nextline->string, inbuffer,
+        INBUFFSIZE);
       macrocurrent->nextline = macrocurrent->nextline->next;
       break;
       }

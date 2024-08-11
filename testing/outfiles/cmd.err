@@ -9,7 +9,7 @@ Usage: xfpt [[-]-help]
             [-S <share-directory>]
             [-v or --version]
             [input-file]
-xpft version 1.00 01-March-2023
+xpft version 1.01-DEV 10-August-2024
 Usage: xfpt [[-]-help]
             [-o <output-file>]
             [-S <share-directory>]

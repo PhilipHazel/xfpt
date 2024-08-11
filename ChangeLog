@@ -1,6 +1,13 @@
 ChangeLog file for xfpt
 -----------------------
 
+Release 1.01 XX-XXX-2024
+------------------------
+
+1. Diagnose an error when inserting an inline macro would overflow a line 
+   buffer.
+
+
 Release 1.00 08-March-2023
 --------------------------
 

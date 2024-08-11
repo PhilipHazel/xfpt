@@ -2,7 +2,7 @@
 *     xfpt - Simple ASCII->Docbook processor     *
 *************************************************/
 
-/* Copyright (c) University of Cambridge, 2023 */
+/* Copyright (c) University of Cambridge, 2024 */
 /* Written by Philip Hazel, started in 2006 */
 
 /* Error handling routines */
@@ -81,7 +81,8 @@ static error_struct error_data[] = {
 /* 30-34 */
 { ec_serious,  "bad macro argument substitution: %s follows \"%s\"" },
 { ec_serious,  "binary zero in input ignored" },
-{ ec_disaster, "input sources too deeply nested" }
+{ ec_disaster, "input sources too deeply nested" },
+{ ec_disaster, "maximum line length exceeded during macro substitution" }
 };
 
 #define error_maxerror (int)(sizeof(error_data)/sizeof(error_struct))
@@ -151,7 +152,7 @@ else for (int i = from_type_ptr; i >= 0; i--)
     {
     if (fe != NULL)
       {
-      if (fe->linenumber > 0) 
+      if (fe->linenumber > 0)
         (void)fprintf(stderr, "   Detected near line %d of %s\n",
           fe->linenumber, fe->filename);
       fe = fe->prev;

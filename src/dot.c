@@ -2,7 +2,7 @@
 *     xfpt - Simple ASCII->Docbook processor     *
 *************************************************/
 
-/* Copyright (c) University of Cambridge, 2023 */
+/* Copyright (c) University of Cambridge, 2024 */
 /* Written by Philip Hazel, started in 2006 */
 
 /* This module contains code for processing a line that starts with a dot. */
@@ -482,6 +482,7 @@ while (*p != 0)
   *pp = as;
   pp = &(as->next);
   as->string = misc_readitem(p, NULL, &length, NULL, 0);
+  as->length = length;
   p += length;
   }
 
@@ -503,7 +504,9 @@ for (;;)
   as->next = NULL;
   *pp = as;
   pp = &(as->next);
-  as->string = misc_copystring(line, Ustrlen(line));
+  length = Ustrlen(line);
+  as->string = misc_copystring(line, length);
+  as->length = length;
   }
 
 /* If there aren't any replacement lines, fake up a comment so that there's
@@ -514,6 +517,7 @@ if (md->lines == NULL)
   md->lines = misc_malloc(sizeof(argstr));
   md->lines->next = NULL;
   md->lines->string = misc_copystring(US". Dummy line\n", 13);
+  md->lines->length = 13;
   }
 }
 
@@ -913,6 +917,7 @@ while (*p != 0)
   *pp = as;
   pp = &(as->next);
   as->string = misc_readitem(p, NULL, &length, NULL, 0);
+  as->length = length;
   p += length;
   }
 }
